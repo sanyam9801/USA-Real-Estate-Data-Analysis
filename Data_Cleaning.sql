@@ -90,8 +90,11 @@ SELECT COUNT(*) FROM re_us1 WHERE sold_date IS NULL;
 
 DELETE FROM re_us1
 WHERE status = 'ready_to_build'
-   OR state IN ('Virginia','Georgia','South Carolina',
-                'Tennessee','Wyoming','West Virginia');
+   OR state NOT IN (
+        'Connecticut', 'Delaware', 'Maine', 'Massachusetts', 
+        'New Hampshire', 'New Jersey', 'New York', 'Pennsylvania', 
+        'Puerto Rico', 'Rhode Island', 'Vermont', 'Virgin Islands'
+      );
 
 ALTER TABLE re_us1
     DROP COLUMN status,
