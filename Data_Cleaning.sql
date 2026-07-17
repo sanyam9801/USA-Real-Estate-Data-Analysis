@@ -18,8 +18,7 @@ SELECT DISTINCT *
 FROM re_us_raw;
 
 
-/* ---------- 2. Fix data types and rename columns ----------
-   In MySQL this is a single ALTER instead of a table rebuild. */
+/* ---------- 2. Fix data types and rename columns ---------- */
 
 ALTER TABLE re_us1
     CHANGE bed      bedrooms  INT,
@@ -87,8 +86,7 @@ SELECT COUNT(*) FROM re_us1 WHERE sold_date IS NULL;
    so the plan is to split into a general table and a "sold" table. */
 
 
-/* ---------- 7. Drop unusable rows and columns ----------
-   BigQuery needed a full table rebuild here; MySQL just deletes. */
+/* ---------- 7. Drop unusable rows and columns ---------- */
 
 DELETE FROM re_us1
 WHERE status = 'ready_to_build'
