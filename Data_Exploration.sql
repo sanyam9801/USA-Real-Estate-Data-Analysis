@@ -216,3 +216,18 @@ FROM re_us_property
 WHERE year IS NULL
 ORDER BY price ASC;
 
+
+
+/*----------price-per-sq-ft--------------------*/
+
+SELECT
+    state,
+    COUNT(*) AS num_sold,
+    AVG(price) AS avg_price,
+    AVG(house_size_m2) AS avg_size_m2,
+    AVG(price) / AVG(house_size_m2) * 0.092903 AS price_per_sqft
+FROM re_us_sold
+WHERE state NOT IN ('Puerto Rico', 'Virgin Islands')  -- too few sales to trust an average
+GROUP BY state
+ORDER BY price_per_sqft DESC;
+
